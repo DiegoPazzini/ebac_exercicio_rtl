@@ -1,30 +1,29 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import PostComment from '.';
+import { fireEvent, render, screen } from '@testing-library/react'
+import PostComment from '.'
 
 describe('Teste para o componente PostComment', () => {
-    it('Deve renderizar o componente corretamente', () => {
-        render(<PostComment/>);
-        expect(screen.getByText('Comentar')).toBeInTheDocument();
-    });
+  it('Deve renderizar o componente corretamente', () => {
+    render(<PostComment />)
+    expect(screen.getByText('Comentar')).toBeInTheDocument()
+  })
 
-    it('Adiciona dois comentários', () =>{
-        render(<PostComment/>);
+  test('Deve adicionar comentário na lista', () => {
+    render(<PostComment />)
+    fireEvent.change(screen.getByTestId('campo-comentario'), {
+      target: {
+        value: 'comentário adicionado 1'
+      }
+    })
+    fireEvent.click(screen.getByTestId('botao-comentario'))
 
-    fireEvent.change(screen.getByTestId('textarea'), {
-        target: {
-            value: 'Comentário 1 adicionado',
-        }
-    });
-    fireEvent.click(screen.getByTestId('button'));
+    fireEvent.change(screen.getByTestId('campo-comentario'), {
+      target: {
+        value: 'comentário adicionado 2'
+      }
+    })
+    fireEvent.click(screen.getByTestId('botao-comentario'))
 
-    fireEvent.change(screen.getByTestId('textarea'), {
-        target: {
-            value: 'Comentário 2 adicionado',
-        }
-    });
-    fireEvent.click(screen.getByTestId('button'));
-
-
-    expect(screen.getAllByTestId('comments')).toHaveLength(2);
-});
-});
+    expect(screen.getByText('comentário adicionado 1')).toBeInTheDocument()
+    expect(screen.getByText('comentário adicionado 2')).toBeInTheDocument()
+  })
+})
