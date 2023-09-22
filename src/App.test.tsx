@@ -11,7 +11,7 @@ describe('Test <App />', () => {
         render(
             <App />
         );
-        // Verifica se um elemento com o atributo 'data-testid' igual a 'comment-button' está presente no documento
-        expect(screen.getByTestId('comment-button')).toBeInTheDocument();
+        // Verifica se um elemento com o atributo 'data-testid' igual a 'Olha só que legal minha miniatura do Batmóvel.' que está presente no documento
+        expect(screen.getByTestId('Olha só que legal minha miniatura do Batmóvel.')).toBeInTheDocument();
     });
 })
